@@ -10,7 +10,8 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('home', {
             parent: 'app',
-            url: '/',
+            url: '/?access_token&expires_in',
+            //params: {access_token: null,expires_in:null},
             data: {
                 authorities: []
             },

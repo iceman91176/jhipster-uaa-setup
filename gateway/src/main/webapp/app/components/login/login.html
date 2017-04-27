@@ -27,6 +27,14 @@
                 <button type="submit" class="btn btn-primary" data-translate="login.form.button">Sign in</button>
             </form>
             <p></p>
+            <form action="/uaa/signin/wso2is" method="POST">
+    <button type="submit" class="btn btn-block jh-btn-social jh-btn-{{ provider }}">
+        <span translate="social.btnLabel" translate-values="{ label: label }">Sign in with WSO2</span>
+    </button>
+    <input name="scope" type="hidden" value="openid"/>
+    
+</form>
+            
             <div class="alert alert-warning">
                 <a class="alert-link" href="" ng-click="vm.requestResetPassword()" data-translate="login.password.forgot">Did you forget your password?</a>
             </div>

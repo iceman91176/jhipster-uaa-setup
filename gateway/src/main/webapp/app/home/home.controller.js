@@ -5,9 +5,18 @@
         .module('gatewayApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','$stateParams','AuthServerProvider'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state,$stateParams,AuthServerProvider) {
+    	
+    	if (($stateParams.access_token != null)&&($stateParams.expires_in != null)){
+    		AuthServerProvider.storeAuthenticationToken($stateParams.access_token);
+    		Principal.identity(true).then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+    	}
+    	
         var vm = this;
 
         vm.account = null;

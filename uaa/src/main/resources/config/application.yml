@@ -43,6 +43,13 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    social:
+        witidentity:
+            clientId: A3XXBhP98OpIGWBq97LS2zLkREUa
+            clientSecret: WZxdFpdXcBChaTNktmv2dHaYgqMa
+            accessTokenUri: https://identity.workspace.witcom.de:443/oauth2/token
+            userAuthorizationUri: https://identity.workspace.witcom.de:443/oauth2/authorize
+            baseUri: https://identity.workspace.witcom.de:443/oauth2/
 
 security:
     basic:

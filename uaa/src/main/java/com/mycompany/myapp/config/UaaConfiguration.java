@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -17,14 +18,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.CompositeTokenGranter;
+import org.springframework.security.oauth2.provider.TokenGranter;
+import org.springframework.security.oauth2.provider.TokenRequest;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import java.security.KeyPair;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableAuthorizationServer
@@ -94,8 +104,10 @@ public class UaaConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager).accessTokenConverter(
-                jwtAccessTokenConverter());
+    	
+        endpoints
+        	.authenticationManager(authenticationManager)
+        	.accessTokenConverter(jwtAccessTokenConverter());
     }
 
     @Autowired
@@ -131,4 +143,7 @@ public class UaaConfiguration extends AuthorizationServerConfigurerAdapter {
         oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
                 "isAuthenticated()");
     }
+
+ 
+    
 }

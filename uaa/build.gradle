@@ -208,6 +208,12 @@ dependencies {
     
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    
+    //Spring social
+    compile('org.springframework.social:spring-social-security:1.1.2.RELEASE')
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-config
+	compile('org.springframework.social:spring-social-config:1.1.2.RELEASE')
+    compile('org.springframework.social:spring-social-wso2is2:0.0.4-SNAPSHOT')
 }
 
 clean {
